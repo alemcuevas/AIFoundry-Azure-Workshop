@@ -1,4 +1,4 @@
-# Laboratorio 5: Creación de Connected Skills en Azure AI Foundry para Andina
+# Laboratorio 4: Creación de Connected Skills en Azure AI Foundry para Andina
 
 ## Objetivo
 
