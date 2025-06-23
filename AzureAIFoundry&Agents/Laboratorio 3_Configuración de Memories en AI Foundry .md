@@ -1,0 +1,94 @@
+# Laboratorio 3: Configuración de Memories en AI Foundry para Andina
+
+## Objetivo
+
+En este laboratorio aprenderemos a configurar la memoria vectorial (Knowledge) de un agente en Azure AI Foundry, utilizando exclusivamente el portal web, sin necesidad de utilizar código o Visual Studio Code.
+
+> Nota: En la versión actual de Azure AI Foundry (junio 2025), la configuración de Memories se gestiona desde la sección Knowledge dentro del agente.
+
+---
+
+## Prerrequisitos
+
+- Acceso al portal de Azure AI Foundry: https://ai.azure.com/  
+- Haber creado previamente:
+  - Un AI Hub
+  - Un Project dentro del Hub (por ejemplo: `ai-foundry-andina-lab`)
+  - Un Agent dentro del Project (por ejemplo: `agente-andina-gpt4o-1`)
+
+---
+
+## Pasos del laboratorio
+
+### Paso 1 - Ingresar al Agent
+
+- Desde el menú lateral izquierdo, ingresar a la sección **Agents**  
+- Seleccionar el agente previamente creado para Andina  
+- Acceder al editor del agente  
+
+---
+
+### Paso 2 - Acceder a la sección Knowledge
+
+- Dentro de la pantalla de configuración del agente, localizar la sección **Knowledge**  
+- Hacer clic en **+ Add** para agregar un nuevo vector store  
+
+![image](https://github.com/user-attachments/assets/9b9b1ca9-f0f6-4208-bbfb-62fb34cd2f77)  
+![image](https://github.com/user-attachments/assets/33d4369b-3eb0-4962-b6f8-7eae8d580424)
+
+---
+
+### Paso 3 - Crear o asociar el Vector Store
+
+- Seleccionar uno de los Vector Stores previamente configurados en el proyecto  
+  (por ejemplo: Azure AI Search, Blob Storage + Embeddings, Cosmos DB vector, etc.)  
+
+- Si no existe aún, crear un nuevo Vector Store desde el menú de la izquierda:  
+  - Ir a **Vector Stores**  
+  - Crear el nuevo recurso, indicando el tipo de almacenamiento y el embedding model a utilizar  
+  - Confirmar la creación  
+
+> Para efectos del laboratorio, se recomienda utilizar **Azure AI Search** como vector store primario
+
+---
+
+### Paso 4 - Cargar datos al Vector Store
+
+- Desde la sección de **Vector Stores**, seleccionar el vector store correspondiente  
+- Subir archivos de datos (PDF, TXT, DOCX, JSON) relacionados con operaciones, procesos o documentación de Andina  
+- El sistema realizará el **chunking** y la **indexación automática** utilizando el embedding model configurado  
+- Validar que los documentos hayan sido cargados correctamente  
+
+![image](https://github.com/user-attachments/assets/3f778bd8-24ae-47bd-ae34-b86781761cd1)  
+![image](https://github.com/user-attachments/assets/03111f45-b7eb-4c13-8b54-1a0986cab071)  
+![image](https://github.com/user-attachments/assets/4094bf6a-e569-4cac-a152-89e267b93ad6)
+
+---
+
+### Paso 5 - Asociar el Vector Store al agente
+
+- Regresar al agente en la sección **Knowledge**  
+- Seleccionar el Vector Store creado previamente  
+- Confirmar la asociación  
+
+---
+
+### Paso 6 - Validación en el Playground
+
+- Hacer clic en **Try in playground**  
+- Realizar preguntas al agente relacionadas a los documentos cargados (por ejemplo: "¿Cuál es el procedimiento para mantenimiento en línea de embotellado?" o "¿Qué dice el instructivo de seguridad para transporte interno?")  
+- Validar que el agente utiliza el conocimiento indexado para enriquecer sus respuestas  
+
+---
+
+## Consideraciones adicionales
+
+- La **short-term memory** (memoria conversacional de corto plazo) actualmente es administrada por el runtime del agente y no es configurable desde el portal  
+- Toda la configuración realizada en este laboratorio corresponde a la **long-term memory** basada en embeddings y retrieval  
+
+---
+
+## Recursos oficiales
+
+- https://learn.microsoft.com/en-us/azure/ai-foundry/how-to-knowledge-sources  
+- https://learn.microsoft.com/en-us/azure/ai-foundry/how-to-vector-stores
