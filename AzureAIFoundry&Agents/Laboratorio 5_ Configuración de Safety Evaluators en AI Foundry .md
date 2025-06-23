@@ -1,4 +1,4 @@
-# Laboratorio 6: Configuración de Safety Evaluators en AI Foundry para Andina
+# Laboratorio 5: Configuración de Safety Evaluators en AI Foundry para Andina
 
 ## Objetivo
 
