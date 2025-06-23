@@ -1,0 +1,50 @@
+# Conceptos Clave de RAG – Parte 3: Conexión a fuentes externas
+
+## 1. ¿Por qué conectar fuentes externas?
+
+RAG no se limita a archivos cargados manualmente: también puede integrar datos desde **bases SQL**, **SharePoint**, **Blob Storage**, **MongoDB**, entre otras. Esto permite construir soluciones RAG que cubran toda la infraestructura de datos empresariales, manteniendo los datos actualizados y pertinentes :contentReference[oaicite:1]{index=1}.
+
+---
+
+## 2. Datos compatibles en Azure AI Foundry
+
+Puedes conectar múltiples orígenes directamente desde el portal:
+
+- **Azure Blob Storage** / Upload local  
+- **Azure AI Search**  
+- **Bases de datos SQL** (Azure SQL, SQL Server)  
+- **MongoDB Atlas** / Cosmos DB  
+- **SharePoint** (via Blob o URL) :contentReference[oaicite:2]{index=2}
+
+Los datos se "chunkean" y vectorizan automáticamente al crear el índice :contentReference[oaicite:3]{index=3}.
+
+---
+
+## 3. Conexión de recursos en Foundry
+
+Para conectar un recurso externo:
+
+1. En el proyecto, ve a **Management Center → Connected resources → + New connection**  
+2. Selecciona el recurso (Azure AI Search, Blob, SQL, MongoDB…)  
+3. Autentica con Azure RBAC y cierra la conexión :contentReference[oaicite:4]{index=4}
+
+Para entornos seguros, asegúrate de configurar correctamente tu VNet o endpoints privados :contentReference[oaicite:5]{index=5}.
+
+---
+
+## 4. Indexación desde fuentes externas
+
+La configuración típica de indexación:
+
+- SQL: usa indexers dentro de Azure AI Search para importar datos de tablas o vistas :contentReference[oaicite:6]{index=6}
+- Blob Storage / SharePoint: ingesta mediante upload o indexers automáticos :contentReference[oaicite:7]{index=7}
+- MongoDB Atlas / Cosmos DB: se utilizan indexers o conexiones directas :contentReference[oaicite:8]{index=8}
+
+Estos indexers aplican chunking y embedding automáticamente.
+
+---
+
+## 5. Consultas híbridas y seguridad de acceso
+
+- Los datasets indexados desde distintos orígenes se pueden consultar mediante **vector**, **full-text** o **hybrid search** :contentReference[oaicite:9]{index=9}  
+- Azure AI Search permite el uso de
