@@ -1,4 +1,4 @@
-# Laboratorio 8: Monitoreo Operativo dentro de AI Foundry
+# Laboratorio 6: Monitoreo Operativo dentro de AI Foundry
 
 ## Objetivo
 
