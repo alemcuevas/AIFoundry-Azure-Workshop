@@ -1,4 +1,4 @@
-# Laboratorio 9: Integración de Voz en Azure AI Foundry
+# Laboratorio 7: Integración de Voz en Azure AI Foundry
 
 ## 🎯 Objetivo
 
