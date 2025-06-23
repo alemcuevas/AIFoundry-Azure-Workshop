@@ -1,0 +1,96 @@
+# Conceptos Clave de RAG – Parte 2: RAG con Azure AI Search 🧠
+
+## 1. ¿Por qué usar Azure AI Search en RAG?
+
+Azure AI Search (antes Cognitive Search) es el motor recomendado por Microsoft para construir soluciones RAG seguras y escalables. Proporciona:
+
+- Indexación eficiente de contenido heterogéneo (PDF, bases de datos, imágenes, etc.)  
+- Búsqueda vectorial, full-text y híbrida  
+- Seguridad empresarial, control de acceso y cumplimiento normativo  
+- Integración nativa con Azure OpenAI y Azure AI Foundry :contentReference[oaicite:1]{index=1}  
+
+### Ventajas clave
+
+- Permite indexar datos a escala y refrescarlos periódicamente :contentReference[oaicite:2]{index=2}  
+- Asegura que los resultados sean relevantes y aptos para LLMs :contentReference[oaicite:3]{index=3}  
+
+---
+
+## 2. Arquitectura RAG con Azure AI Search
+
+1. **App de usuario** (web o chat) envía consulta.  
+2. **Azure AI Search** busca y recupera fragmentos relevantes.  
+3. La consulta + resultados se envían a un **LLM** (ej. GPT‑4) que genera la respuesta.  
+4. Puede haber pasos adicionales como reconsulta si la primera respuesta no es satisfactoria :contentReference[oaicite:4]{index=4}.
+
+El motor de búsqueda no genera texto, solo entrega datos para el LLM :contentReference[oaicite:5]{index=5}.
+
+---
+
+## 3. Creación de índices en Azure AI Foundry
+
+Desde el portal de Azure AI Foundry:
+
+1. Ve a **Knowledge → Vector Indexes**  
+2. Elige **Azure AI Search** como backend  
+3. Define:
+   - Nombre del índice (ej. `rag_business_index`)
+   - Fuente de datos (Blob, SQL, BLOB)
+   - Embedding model (ej. `text-embedding-ada-002`) :contentReference[oaicite:6]{index=6}  
+4. Crea el índice; este realiza chunking y vectorización automáticamente :contentReference[oaicite:7]{index=7}  
+
+---
+
+## 4. Tipos de búsqueda
+
+- **Vector search**: encuentra fragmentos semánticamente similares :contentReference[oaicite:8]{index=8}  
+- **Full‑text search**: útil para coincidencias exactas y filtros :contentReference[oaicite:9]{index=9}  
+- **Hybrid search**: combina ambos métodos en una única consulta (vector + texto) :contentReference[oaicite:10]{index=10}  
+- **Semantic ranking**: reordena resultados usando modelos ML para priorizar relevancia semántica :contentReference[oaicite:11]{index=11}  
+
+---
+
+## 5. Integración LLM – búsqueda – respuesta
+
+- El usuario pregunta; Azure AI Search devuelve fragmentos (hasta k resultados)  
+- Se arma un prompt al LLM que incluye:
+  - Pregunta original  
+  - Fragmentos de contexto  
+  - Indicaciones como “solo responde con lo que esté en los fragmentos”  
+- LLM genera respuesta basada en contexto externo, minimizando alucinaciones :contentReference[oaicite:12]{index=12}  
+
+Azure OpenAI y Azure AI Search pueden integrarse directamente con una sola API – “OpenAI on your data” :contentReference[oaicite:13]{index=13}.
+
+---
+
+## 6. Embedding y chat models
+
+- **Embedding models**: usados tanto al indexar documentos como al convertir consultas en vectores. Es crucial usar el mismo modelo en ambos extremos (por ej. `text‑embedding‑ada‑002`) :contentReference[oaicite:14]{index=14}  
+- **Chat models**: LLMs que generan respuestas (GPT‑4, GPT‑3.5, GPT‑4o), desplegables desde Azure OpenAI o Foundry :contentReference[oaicite:15]{index=15}
+
+---
+
+## 7. Seguridad y control
+
+- Control de acceso (RBAC) para índices y búsqueda :contentReference[oaicite:16]{index=16}  
+- En entornos regulados, puedes filtrar resultados por metadatos (fecha, planta, etc.) usando search filters :contentReference[oaicite:17]{index=17}  
+- Garantiza compliance al mantener datos locales y seguros dentro de la nube
+
+---
+
+## 8. Beneficios y casos de uso
+
+- **Inicio rápido** gracias al setup sin código en portal  
+- **Escalabilidad** y bajo mantenimiento al indexar contenido automáticamente :contentReference[oaicite:18]{index=18}  
+- **Flexibilidad** en fuentes de datos: Blob, SQL, SharePoint, etc. :contentReference[oaicite:19]{index=19}  
+- **Casos típicos**: atención al cliente, soporte técnico, documentos normativos, conocimientos internos
+
+---
+
+## 9. Referencias oficiales
+
+- RAG en Azure AI Search – visión general :contentReference[oaicite:20]{index=20}  
+- Quickstart RAG con Azure AI Search y OpenAI :contentReference[oaicite:21]{index=21}  
+- Vector indexes en Azure AI Foundry :contentReference[oaicite:22]{index=22}  
+- Modelos de embeddings y chat para RAG :contentReference[oaicite:23]{index=23}  
+- Beneficios de hybrid & semantic ranking :contentReference[oaicite:24]{index=24}  
